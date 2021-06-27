@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
-const {createUser ,getUsers , createFavorite, createToWatch , deleteFav , deleteToWatch}=require('./controllers/User.controller')
+const {createUser ,getUsers , createFavorite, createToWatch , deleteFav , deleteToWatch , createReview , getReviews , deleteReview}=require('./controllers/User.controller')
 const {getTopRatedMovies,getPopularMovies,MovieSearchByName,getUpcomingMovies} = require('./controllers/Movie.controller');
 const  {movieModel , seedUserModel}=require('./models/UserMovies.model');
 mongoose.connect('mongodb://localhost:27017/users', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -31,5 +31,9 @@ app.delete('/usersFav/:idx',deleteFav);
 
 app.post('/usersWatch',createToWatch);
 app.delete('/usersWatch/:idx',deleteToWatch);
+
+app.get('/userReview', getReviews);
+app.post('/userReview', createReview);
+app.delete('/userReview/:idx', deleteReview);
 
 app.listen(PORT);
