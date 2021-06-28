@@ -9,7 +9,7 @@ const getTopRatedMovies = async (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -25,8 +25,7 @@ const getPopularMovies = async (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average,
-                imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -43,7 +42,7 @@ const MovieSearchByName = (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
         });
         res.send(arrOfMovies);
@@ -57,7 +56,7 @@ const getUpcomingMovies = async (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -68,4 +67,16 @@ const getUpcomingMovies = async (req, res) => {
         })
 }
 
-module.exports = { getTopRatedMovies, getPopularMovies, MovieSearchByName, getUpcomingMovies };
+
+const getTrailer = (req, res) => {
+    const { movieId } = req.query;
+    axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${process.env.MOVIE_API_KEY}`).then(response => {
+        const trailerURL = `https://www.youtube.com/embed/${response.data.results[0].key}`
+        res.send(trailerURL)
+    })
+        .catch(error => {
+            res.send('Error hahahahahaha  ', error.message);
+        });
+}
+
+module.exports = { getTopRatedMovies, getPopularMovies, MovieSearchByName, getUpcomingMovies,getTrailer  };
