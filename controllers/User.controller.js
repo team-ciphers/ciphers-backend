@@ -32,7 +32,8 @@ const createUser = (req, res) => {
             }
             else{
               console.log("email found");
-            res.send(userData);    
+            res.send(userData);   
+             
             }
            
         }
