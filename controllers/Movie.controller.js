@@ -1,9 +1,6 @@
 "user strict";
 
 const { default: axios } = require('axios');
-<<<<<<< HEAD
-const movieModel = require('../models/UserMovies.model')
-=======
 const { response } = require('express');
 const { Movie } = require('../models/Movies.model')
 
@@ -12,7 +9,7 @@ const getTopRatedMovies = async (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -29,7 +26,7 @@ const getPopularMovies = async (req, res) => {
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
             let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average,
-                imageURL);
+                imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -46,7 +43,7 @@ const MovieSearchByName = (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
         });
         res.send(arrOfMovies);
@@ -60,7 +57,7 @@ const getUpcomingMovies = async (req, res) => {
         const arrOfMovies = [];
         response.data.results.map(item => {
             let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL);
+            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
             arrOfMovies.push(movieObject);
             console.log(arrOfMovies);
         })
@@ -72,4 +69,3 @@ const getUpcomingMovies = async (req, res) => {
 }
 
 module.exports = { getTopRatedMovies, getPopularMovies, MovieSearchByName, getUpcomingMovies };
->>>>>>> 7874bd08b23ecc79eed5c950452f8296abb5b5c6
