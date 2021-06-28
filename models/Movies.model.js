@@ -12,13 +12,13 @@ const MovieSchema = new mongoose.Schema({
 })
 
 class Movie {
-  constructor(original_title, overview, release_date, vote_average, poster_path, id) {
+  constructor(original_title, overview, release_date, vote_average, poster_path, movieId) {
     this.original_title = original_title;
     this.overview = overview;
     this.release_date = release_date;
     this.vote_average = vote_average;
     this.poster_path = poster_path;
-    this.id = id;
+    this.movieId = movieId;
   }
 }
 
