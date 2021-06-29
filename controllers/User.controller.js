@@ -76,14 +76,12 @@ const createToWatch = (req, res) => {
     })
 }
 
-
 const deleteFav = (req, res) => {
     const idx = req.params.idx;
     const { email } = req.query;
     movieModel.findOne({ email: email }, (error, userData) => {
         if (error) {
             res.send(error);
-
         }
         else {
             console.log(userData)
@@ -91,14 +89,9 @@ const deleteFav = (req, res) => {
             userData.save();
             res.send(userData);
             console.log(userData);
-
         }
     })
-    console.log(req.params);
-
 }
-
-
 
 const deleteToWatch = (req, res) => {
     const idx = req.params.idx;
@@ -150,8 +143,8 @@ const createReview = (req, res) => {
 
 const getReviews = (req, res) => {
 
-    const {movieId} = req.query;
-    reviewModel.find({movieId:movieId}, (error, user) => {
+    const { movieId } = req.query;
+    reviewModel.find({ movieId: movieId }, (error, user) => {
         if (error) {
             res.send(error);
         }
@@ -164,7 +157,7 @@ const getReviews = (req, res) => {
 const deleteReview = (req, res) => {
     const idx = req.params.idx;
     const { movieId } = req.query;
-    reviewModel.findOne({ movieId:movieId }, (error, userData) => {
+    reviewModel.findOne({ movieId: movieId }, (error, userData) => {
         if (error) {
             res.send(error);
 
@@ -184,4 +177,4 @@ const deleteReview = (req, res) => {
 
 
 
-module.exports = { createUser, getUsers, createFavorite, createToWatch, deleteFav, deleteToWatch, createReview ,getReviews , deleteReview};
+module.exports = { createUser, getUsers, createFavorite, createToWatch, deleteFav, deleteToWatch, createReview, getReviews, deleteReview };
