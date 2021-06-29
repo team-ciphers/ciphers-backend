@@ -3,24 +3,23 @@
 const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-    movieId:{ type: Number },
-  reviews:{type: Array}
+    movieId: { type: Number },
+    reviews: { type: Array }
 
 }) // this is dedicated for the profile page lists for the user.
 
 const reviewModel = mongoose.model('reviewsList', reviewSchema);
 
 
-const seedMovieId = (movieId ,review) => {
+const seedMovieId = (movieId, review) => {
 
     const newUser = new reviewModel({
-        movieId:movieId,
-        reviews:[]
+        movieId: movieId,
+        reviews: [review]
     });
-    newUser.reviews.push(review);
     newUser.save();
     console.log(newUser);
 };
-module.exports = {reviewModel ,seedMovieId}
+module.exports = { reviewModel, seedMovieId }
 
 
