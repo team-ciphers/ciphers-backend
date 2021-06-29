@@ -114,18 +114,15 @@ const deleteToWatch = (req, res) => {
 
 }
 
-
 const createReview = (req, res) => {
-    const { movieId, review } = req.body;
-
+    const movieId = req.body.movieId;
+    const review = req.body.review;
     reviewModel.find({ movieId: movieId }, (error, userData) => {
         if (error) {
-
             res.send(error);
         }
         else {
             console.log('userdata', userData);
-
             if (userData.length === 0) {
                 seedMovieId(movieId, review);
                 res.send(userData);
@@ -142,7 +139,6 @@ const createReview = (req, res) => {
 }
 
 const getReviews = (req, res) => {
-
     const { movieId } = req.query;
     reviewModel.find({ movieId: movieId }, (error, user) => {
         if (error) {
@@ -160,7 +156,6 @@ const deleteReview = (req, res) => {
     reviewModel.findOne({ movieId: movieId }, (error, userData) => {
         if (error) {
             res.send(error);
-
         }
         else {
             console.log(userData)
@@ -168,13 +163,11 @@ const deleteReview = (req, res) => {
             userData.save();
             res.send(userData);
             console.log(userData);
-
         }
     })
     console.log(req.params);
 
 }
-
 
 
 module.exports = { createUser, getUsers, createFavorite, createToWatch, deleteFav, deleteToWatch, createReview, getReviews, deleteReview };
