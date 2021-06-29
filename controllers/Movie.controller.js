@@ -51,6 +51,7 @@ const MovieSearchByName = (req, res) => {
             res.send('Error hahahahahaha  ', error.message);
         });
 }
+
 const getUpcomingMovies = async (req, res) => {
     await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`).then(response => {
         const arrOfMovies = [];
