@@ -8,10 +8,11 @@ const getTopRatedMovies = async (req, res) => {
     await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`).then(response => {
         const arrOfMovies = [];
         response.data.results.map(item => {
-            let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
-            arrOfMovies.push(movieObject);
-            console.log(arrOfMovies);
+            if (item.poster_path !== null) {
+                let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+                let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
+                arrOfMovies.push(movieObject);
+            }
         })
         res.send(arrOfMovies);
     })
@@ -24,10 +25,11 @@ const getPopularMovies = async (req, res) => {
     await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`).then(response => {
         const arrOfMovies = [];
         response.data.results.map(item => {
-            let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
-            arrOfMovies.push(movieObject);
-            console.log(arrOfMovies);
+            if (item.poster_path !== null) {
+                let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+                let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
+                arrOfMovies.push(movieObject);
+            }
         })
         res.send(arrOfMovies);
     })
@@ -41,9 +43,11 @@ const MovieSearchByName = (req, res) => {
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${MovieName}`).then(response => {
         const arrOfMovies = [];
         response.data.results.map(item => {
-            let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
-            arrOfMovies.push(movieObject);
+            if (item.poster_path !== null) {
+                let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+                let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
+                arrOfMovies.push(movieObject);
+            }
         });
         res.send(arrOfMovies);
     })
@@ -56,10 +60,11 @@ const getUpcomingMovies = async (req, res) => {
     await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`).then(response => {
         const arrOfMovies = [];
         response.data.results.map(item => {
-            let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-            let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
-            arrOfMovies.push(movieObject);
-            console.log(arrOfMovies);
+            if (item.poster_path !== null) {
+                let imageURL = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+                let movieObject = new Movie(item.title, item.overview, item.release_date, item.vote_average, imageURL, item.id);
+                arrOfMovies.push(movieObject);
+            }
         })
         res.send(arrOfMovies);
     })
@@ -76,7 +81,8 @@ const getTrailer = (req, res) => {
         res.send(trailerURL)
     })
         .catch(error => {
-            res.send('Error hahahahahaha  ', error.message);
+            res.send('https://www.youtube.com/embed/2U76x2fD_tE')
+            res.end();
         });
 }
 
